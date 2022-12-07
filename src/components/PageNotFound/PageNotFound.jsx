@@ -1,10 +1,10 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./PageNotFound.css";
 
 const PageNotFound = () => {
-  const history = useHistory();
-  const goBack = () => history.go(-1);
-  const backRef = () => history.createHref(goBack);
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
+  const backRef = () => navigate.createHref(goBack);
 
   return (
     <section className="not-found">
