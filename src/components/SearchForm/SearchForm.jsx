@@ -1,9 +1,13 @@
 import "./SearchForm.css";
 
 const SearchForm = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <section className="search">
-      <form className="search__form" noValidate>
+      <form className="search__form" onSubmit={handleSubmit} noValidate>
         <fieldset className="search__fieldset">
           <label className="search__label">
             <input
@@ -22,7 +26,7 @@ const SearchForm = () => {
         </fieldset>
         <label className="search__checkbox-label">
           <input className="search__checkbox-input" type="checkbox"/>
-          Короткометражки
+          <span>Короткометражки</span>
         </label>
       </form>
     </section>

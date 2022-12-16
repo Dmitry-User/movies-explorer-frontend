@@ -28,7 +28,7 @@ const NavTab = () => {
         <li className="nav-tab__list-item">
           <Link
             className="nav-tab__link"
-            to="aboutMe"
+            to="about-me"
             smooth={true}
             duration={650}
           >

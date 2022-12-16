@@ -19,23 +19,6 @@
   gap: 44px;
 }
 
-.header__logo-link {
-  width: 38px;
-  height: 38px;
-  opacity: 1;
-  transition: opacity .2s ease-in-out;
-}
-
-.header__logo-link:hover {
-  opacity: .8;
-  }
-
-
-.header__logo-img {
-  width: 100%;
-  height: 100%;
-}
-
 .header__links {
   flex: 1 1 auto;
   margin: 0;
@@ -85,7 +68,7 @@
   position: relative;
   cursor: pointer;
   z-index: 3;
-  transition: .4s ease-in-out;
+  transition: .3s ease-in-out;
 }
 
 .header__button-burger span,
@@ -96,7 +79,7 @@
   width: 28px;
   height: 3px;
   background-color: #fff;
-  transition: .4s ease-in-out;
+  transition: .3s ease-in-out;
 }
 
 .header__button-burger::before {
@@ -119,14 +102,14 @@
 
 .header__button-burger_active {
   margin-right: -13px;
-  transition: .4s ease-in-out;
+  transition: .3s ease-in-out;
 }
 
 .header__button-burger_active span,
 .header__button-burger_active::before,
 .header__button-burger_active::after {
   width: 22px;
-  transition: .4s ease-in-out;
+  transition: .3s ease-in-out;
 }
 
 .header__button-burger_active::before {
@@ -165,8 +148,27 @@
     width: 54px;
     height: 26px;
   }
+  .header__button-burger {
+    width: 40px;
+    height: 43px;
+    margin-right: 2px;
+  }
+  .header__button-burger::before {
+    width: 22px;
+    top: 13px;
+  }
+  .header__button-burger span,
+  .header__button-burger::after {
+    width: 22px;
+  }
   .header__button-burger_active {
-    margin-top: -18px;
-    margin-right: -6px;
+    margin-top: -20px;
+    margin-right: -4px;
+  }
+  .header__button-burger_active::before {
+    transform: rotate(45deg) translate(-2px, 15px);
+  }
+  .header__button-burger_active::after {
+    transform: rotate(135deg) translate(2px, 15px);
   }
 }

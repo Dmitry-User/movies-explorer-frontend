@@ -27,7 +27,7 @@
   color: #fff;
 }
 
-.not-found__button {
+.not-found__link {
   background: none;
   border: none;
   outline: none;
@@ -41,7 +41,7 @@
   transition: opacity .2s ease-in-out;
 }
 
-.not-found__button:hover {
+.not-found__link:hover {
   opacity: .7;
 }
 
@@ -65,7 +65,7 @@
     font-size: 12px;
     line-height: 15px;
   }
-  .not-found__button {
+  .not-found__link {
     font-size: 12px;
     line-height: 15px;
   }

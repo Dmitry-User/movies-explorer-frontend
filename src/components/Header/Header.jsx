@@ -1,27 +1,25 @@
 import "./Header.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
+import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 
 const Header = ({ loggedIn }) => {
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [ isOpenNav, setisOpenNav] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpenMenu(state => !state);
+    setisOpenNav(state => !state);
   };
 
   return (
     <header className={`header ${!loggedIn && "header_bg-color_deep-blue"}`}>
       <div className="header__content">
-        <Link className="header__logo-link" to="/">
-          <img src={logo} alt="Логотип" className="header__logo-img" />
-        </Link>
+        <Logo />
         {loggedIn ? (
           <>
-            <Navigation isOpen={isOpenMenu} onClick={toggleMenu}/>
+            <Navigation isOpen={isOpenNav} onClick={toggleMenu}/>
             <button
-              className={`header__button-burger ${isOpenMenu && "header__button-burger_active"}`}
+              className={`header__button-burger ${ isOpenNav && "header__button-burger_active"}`}
               type="button"
               onClick={toggleMenu}
             >

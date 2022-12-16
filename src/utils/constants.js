@@ -94,4 +94,33 @@ const savedMovies = [
   },
 ];
 
-export { movies, savedMovies };
+const registerContent = {
+  pageTitle: 'Добро пожаловать!',
+  submitText: 'Зарегистрироваться',
+  pageText: 'Уже зарегистрированы?',
+  linkText: 'Войти',
+  linkPath: '/signin',
+};
+
+const loginContent = {
+  pageTitle: 'Рады видеть!',
+  submitText: 'Войти',
+  pageText: 'Ещё не зарегистрированы?',
+  linkText: 'Регистрация',
+  linkPath: '/signup',
+};
+
+const pathsForHeader = [
+  '/',
+  '/movies',
+  '/saved-movies',
+  '/profile',
+];
+
+const pathsForFooter = [
+  '/',
+  '/movies',
+  '/saved-movies',
+];
+
+export { movies, savedMovies, loginContent, registerContent, pathsForHeader, pathsForFooter };

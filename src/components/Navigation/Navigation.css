@@ -81,21 +81,30 @@
   .navigation {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 1;
-    visibility: visible;
     opacity: 1;
-    transition: width .35s ease-out, opacity .2s ease-out, visibility .2s;
+    z-index: 2;
+    transition: all .4s ease-in-out;
+  }
+  .navigation::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
   }
   .navigation_hiden {
-    visibility: hidden;
+    left: 100%;
     opacity: 0;
-    width: 0;
   }
   .navigation__wrapper {
     background-color: rgba(0, 0, 0, 0.3);
+    transition: .4s ease-out;
   }
   .navigation__links {
     box-sizing: border-box;
@@ -107,7 +116,7 @@
     background-color: #202020;
     font-size: 18px;
     line-height: 22px;
-    z-index: 2;
+    z-index: 3;
   }
   .navigation__links-container {
     flex-direction: column;

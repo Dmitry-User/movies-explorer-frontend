@@ -15,7 +15,6 @@ const Main = () => {
       <Techs />
       <AboutMe />
     </main>
-
   );
 };
 
