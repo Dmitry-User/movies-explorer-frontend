@@ -80,7 +80,7 @@
 
 @media (max-width: 928px) {
   .about-me {
-    padding: 90px 50px ;
+    padding: 90px 50px 79px;
   }
   .about-me__profile {
     max-width: 364px;

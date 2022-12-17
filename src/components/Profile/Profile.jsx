@@ -27,7 +27,7 @@ const Profile = ({ onLogout }) => {
     <main className="profile">
       <div className="profile__content">
         <h2 className="profile__title">Привет, Виталий!</h2>
-        <form className="profile__form" onSubmit={handleSubmit} noValidate>
+        <form className="profile__form" onSubmit={handleSubmit}>
           <fieldset className="profile__form-fieldset">
             <label className="profile__label">
               <span className="profile__label-text">Имя</span>

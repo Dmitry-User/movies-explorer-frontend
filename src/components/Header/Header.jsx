@@ -12,14 +12,14 @@ const Header = ({ loggedIn }) => {
   };
 
   return (
-    <header className={`header ${!loggedIn && "header_bg-color_deep-blue"}`}>
+    <header className={`header ${!loggedIn ? "header_bg-color_deep-blue" : ""}`}>
       <div className="header__content">
         <Logo />
         {loggedIn ? (
           <>
             <Navigation isOpen={isOpenNav} onClick={toggleMenu}/>
             <button
-              className={`header__button-burger ${ isOpenNav && "header__button-burger_active"}`}
+              className={`header__button-burger ${ isOpenNav ? "header__button-burger_active" : ""}`}
               type="button"
               onClick={toggleMenu}
             >

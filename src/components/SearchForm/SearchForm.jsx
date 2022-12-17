@@ -7,16 +7,15 @@ const SearchForm = () => {
 
   return (
     <section className="search">
-      <form className="search__form" onSubmit={handleSubmit} noValidate>
+      <form className="search__form" onSubmit={handleSubmit}>
         <fieldset className="search__fieldset">
-          <label className="search__label">
-            <input
-              type="text"
-              placeholder="Фильм"
-              required
-              className="search__input"
-            />
-          </label>
+          <input
+            type="text"
+            placeholder="Фильм"
+            required
+            className="search__input"
+            id="search-input"
+          />
           <button
             type="submit"
             className="search__submit-button"
@@ -25,7 +24,7 @@ const SearchForm = () => {
           </button>
         </fieldset>
         <label className="search__checkbox-label">
-          <input className="search__checkbox-input" type="checkbox"/>
+          <input className="search__checkbox-input" type="checkbox" />
           <span>Короткометражки</span>
         </label>
       </form>

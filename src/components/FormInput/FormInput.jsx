@@ -10,10 +10,10 @@ const FormInput = ({
   onChange,
 }) => {
   return (
-    <label className="form-input__label">
-      <span className="form-input__label-text">{label}</span>
+    <label className="page__form-label">
+      <span className="page__form-label-text">{label}</span>
       <input
-        className={`form-input__input ${error ? "form-input__input_type_error" : ""}`}
+        className={`page__form-input ${error ? "page__form-input_type_error" : ""}`}
         type={type}
         name={name}
         onChange={onChange}
@@ -21,7 +21,7 @@ const FormInput = ({
         value={value}
         required
       />
-      <span className="form-input__error">{error}</span>
+      <span className="page__form-error">{error}</span>
     </label>
   );
 };
