@@ -16,6 +16,12 @@
   height: 203px;
   object-fit: cover;
   object-position: center;
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
+
+.card__image:hover {
+  opacity: .8;
 }
 
 .card__info {

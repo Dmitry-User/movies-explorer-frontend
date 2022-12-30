@@ -1,16 +1,30 @@
-import "./Register.css";
+import { useEffect } from "react";
 import PageWithForm from "../PageWithForm/PageWithForm";
 import FormInput from "../FormInput/FormInput";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
 import { registerContent } from "../../utils/constants";
 
-const Register = () => {
-  const { values, handleChange, isValid, errors } = useFormWithValidation({ name: "", email: "", password: "" });
+const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
+  const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation({});
+  const submitText = isLoading ? "Сохранение..." : "Регистрация";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onRegister(values);
+    resetForm(values);
+  };
+
+  useEffect(() => {
+    onHideMessage();
+  },[values]);
 
   return (
     <PageWithForm
       content={registerContent}
       isValid={isValid}
+      onSubmit={handleSubmit}
+      message={message}
+      submitText={submitText}
     >
       <FormInput
         label="Имя"

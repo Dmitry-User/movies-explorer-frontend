@@ -75,6 +75,19 @@
   opacity: 0.8;
 }
 
+.search__error {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: #EE3465;
+}
+
 .search__checkbox-label {
   width: min-content;
   display: flex;

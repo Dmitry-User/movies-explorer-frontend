@@ -1,36 +1,36 @@
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { BASE_URL } from "../../utils/constants";
+import getHoursAndMins from "../../utils/convertedDuration";
 
-const MoviesCard = ({ movie }) => {
+const MoviesCard = ({ movie, isLiked, onClick }) => {
   const { pathname } = useLocation();
-  const [isLiked, setIsLiked] = useState(false);
-
-  const getHoursAndMins = (duration) => {
-    if (!duration) return;
-    let hours = Math.floor(duration/60);
-    let minutes = duration % 60;
-    if (hours === 0) return `${minutes}м`;
-    return `${hours}ч ${minutes}м`;
-  };
+  const locationMovies = pathname === "/movies";
 
   const handleClick = () => {
-    setIsLiked(!isLiked);
+    onClick(movie);
   };
 
   return (
     <article className="card">
-      <img
-        src={movie.image}
-        alt={movie.nameRU}
-        className="card__image"
-      />
+      <a
+        className="card__link"
+        href={movie.trailerLink}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          className="card__image"
+          src={locationMovies ? (BASE_URL + movie.image.url) : movie.image}
+          alt={movie.nameRU}
+        />
+      </a>
       <div className="card__info" onClick={handleClick}>
         <div className="card__column">
           <h2 className="card__title">{movie.nameRU}</h2>
           <p className="card__duration">{getHoursAndMins(movie.duration)}</p>
         </div>
-        {pathname === "/movies" ? (
+        {locationMovies ? (
           <button
             className={`card__button ${isLiked ? "card__button_type_like-active" : "card__button_type_like"}`}
             type="button"

@@ -18,7 +18,7 @@ const FormInput = ({
         name={name}
         onChange={onChange}
         placeholder={placeholder}
-        value={value}
+        value={value || ""}
         required
       />
       <span className="page__form-error">{error}</span>

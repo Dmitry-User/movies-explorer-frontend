@@ -1,16 +1,35 @@
-import "./Login.css";
+import { useEffect } from "react";
 import PageWithForm from "../PageWithForm/PageWithForm";
 import FormInput from "../FormInput/FormInput";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
 import { loginContent } from "../../utils/constants";
 
-const Login = () => {
-  const { values, handleChange, isValid, errors } = useFormWithValidation({ name: "", email: "", password: "" });
+const Login = ({
+  onLogin,
+  message,
+  isLoading,
+  onHideMessage
+}) => {
+  const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation({});
+  const submitText = isLoading ? "Сохранение..." : "Войти";
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin(values);
+    resetForm({ email: values.email});
+  };
+
+  useEffect(() => {
+    onHideMessage();
+  },[values]);
 
   return (
     <PageWithForm
       content={loginContent}
       isValid={isValid}
+      onSubmit={handleSubmit}
+      message={message}
+      submitText={submitText}
     >
       <FormInput
         label="E-mail"

@@ -1,13 +1,18 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-const MoviesCardList = ({ movies }) => {
+const MoviesCardList = ({ movies, findInSavedMovies, onClick }) => {
+
   return (
     <section className="card-list">
       <ul className="card-list__cards">
         {movies.map((movie) => (
-          <li key={movie.id}>
-            <MoviesCard movie={movie} />
+          <li key={movie.id || movie._id}>
+            <MoviesCard
+              movie={movie}
+              isLiked={findInSavedMovies(movie)}
+              onClick={onClick}
+            />
           </li>
         ))}
       </ul>
