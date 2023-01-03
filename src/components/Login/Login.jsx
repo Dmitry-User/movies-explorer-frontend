@@ -21,7 +21,7 @@ const Login = ({
 
   useEffect(() => {
     onHideMessage();
-  },[values]);
+  }, [values]);
 
   return (
     <PageWithForm
@@ -36,6 +36,7 @@ const Login = ({
         type="email"
         name="email"
         placeholder="Введите email"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
         value={values.email}
         error={errors.email}
         onChange={handleChange}

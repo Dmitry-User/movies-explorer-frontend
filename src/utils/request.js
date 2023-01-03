@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.moviexplorers.nomoredomains.club';
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://api.moviexplorers.nomoredomains.club';
+// const BASE_URL = 'http://localhost:3001';
 
 const request = ({ url, method, data }) => {
   return fetch(`${BASE_URL}${url}`, {

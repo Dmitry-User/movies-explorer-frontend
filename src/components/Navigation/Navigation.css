@@ -98,7 +98,7 @@
     background-color: rgba(0, 0, 0, 0.3);
     z-index: -1;
   }
-  .navigation_hiden {
+  .navigation_hidden {
     left: 100%;
     opacity: 0;
   }

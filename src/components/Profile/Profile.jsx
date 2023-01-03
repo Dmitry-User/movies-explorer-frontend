@@ -24,7 +24,7 @@ const Profile = ({
 
   useEffect(() => {
     onHideMessage();
-  },[values]);
+  }, [values]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +49,7 @@ const Profile = ({
                   value={values.name}
                   minLength={2}
                   maxLength={30}
+                  pattern="^[A-Za-zА-Яа-яЁё\s\-]*$"
                   placeholder="Имя пользователя"
                   disabled={!isEditProfile}
                   required
@@ -65,6 +66,7 @@ const Profile = ({
                   type="email"
                   onChange={handleChange}
                   value={values.email}
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                   placeholder="E-mail пользователя"
                   disabled={!isEditProfile}
                   required
@@ -75,7 +77,7 @@ const Profile = ({
             </div>
           </fieldset>
           <div className="profile__form-handlers">
-            <span className="profile__message">{message}</span>
+            {message && <span className="profile__message">{message}</span>}
             {isEditProfile ? (
               <button
                 type="submit"

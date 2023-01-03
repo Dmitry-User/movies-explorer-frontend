@@ -7,13 +7,14 @@
 }
 
 .card__link {
+  display: block;
+  height: 203px;
   text-decoration: none;
 }
 
 .card__image {
-  display: block;
   width: 100%;
-  height: 203px;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   opacity: 1;
@@ -21,6 +22,7 @@
 }
 
 .card__image:hover {
+  transform: scale(1.005);
   opacity: .8;
 }
 
@@ -101,7 +103,7 @@
  .card {
     height: 262px;
  }
- .card__image {
+ .card__link {
     height: 190px;
  }
  .card__info {
@@ -119,7 +121,7 @@
   .card {
     height: 237px;
   }
-  .card__image {
+  .card__link {
     height: 168px;
   }
   .card__info {

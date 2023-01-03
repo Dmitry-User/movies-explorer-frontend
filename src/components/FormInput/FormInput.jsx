@@ -6,6 +6,9 @@ const FormInput = ({
   name,
   value,
   placeholder,
+  pattern,
+  minLength,
+  maxLength,
   error,
   onChange,
 }) => {
@@ -18,6 +21,9 @@ const FormInput = ({
         name={name}
         onChange={onChange}
         placeholder={placeholder}
+        pattern={pattern}
+        minLength={minLength}
+        maxLength={maxLength}
         value={value || ""}
         required
       />

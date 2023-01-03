@@ -3,11 +3,8 @@ import { useState, useEffect } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-// import MoreCards from "../MoreCards/MoreCards";
 import { searchMovies, filterMovies } from "../../utils/filterMovies";
 import { errMessage } from "../../utils/constants";
-
-const localMovies = JSON.parse(localStorage.getItem("movies")) || [];
 
 const Movies = ({
   isLoading,
@@ -17,10 +14,7 @@ const Movies = ({
 }) => {
   const [movies, setMovies] = useState([]);
   const [message, setMessage] = useState("");
-
-  const saveInLocalStorage = (name, value) => {
-    localStorage.setItem(name, JSON.stringify(value));
-  };
+  const localMovies = JSON.parse(localStorage.getItem("movies")) ?? [];
 
   const handleSearch = async (query, isShort) => {
     let foundMovies;
@@ -29,38 +23,37 @@ const Movies = ({
       await getMovies()
         .then((res) => {
           foundMovies = searchMovies(res, query);
-          saveInLocalStorage("selected-movies", foundMovies);
+          localStorage.setItem("selected-movies", JSON.stringify(foundMovies));
         })
         .catch(() => setMessage(errMessage));
     } else {
       foundMovies = searchMovies(localMovies, query);
-      saveInLocalStorage("selected-movies", foundMovies);
+      localStorage.setItem("selected-movies", JSON.stringify(foundMovies));
     }
 
     if (foundMovies.length === 0) {
       setMovies([]);
       setMessage("Ничего не найдено");
     } else {
-      handleFilter(isShort);
-      setMessage("");
+      foundMovies = filterMovies(JSON.parse(localStorage.getItem("selected-movies")), isShort);
+      foundMovies.length === 0 ? setMessage("Ничего не найдено") : setMessage("");
+      setMovies(foundMovies);
     }
   };
 
-
   const handleFilter = (isShort) => {
-    const foundMovies = filterMovies(JSON.parse(localStorage.getItem("selected-movies")), isShort);
+    if (localMovies.length === 0) return;
+    const foundMovies = filterMovies(JSON.parse(localStorage.getItem("selected-movies")) || [], isShort);
     foundMovies.length === 0 ? setMessage("Ничего не найдено") : setMessage("");
     setMovies(foundMovies);
-  }
+  };
 
   useEffect(() => {
+    if (localMovies.length === 0) return;
     setMovies(
       filterMovies(
-        searchMovies(
-          localMovies,
-          localStorage.getItem("query")
-        ),
-        JSON.parse(localStorage.getItem("short") || false)
+        searchMovies(localMovies, localStorage.getItem("query")),
+        JSON.parse(localStorage.getItem("short"))
       )
     );
   }, []);
@@ -77,7 +70,7 @@ const Movies = ({
       ) : (
         <>
           {message && <h2 className="movies__message">{message}</h2>}
-          {movies && <MoviesCardList movies={movies} onClick={onClick} findInSavedMovies={findInSavedMovies} />}
+          {movies && <MoviesCardList movies={movies} onClick={onClick} findInSavedMovies={findInSavedMovies}/>}
         </>
       )}
     </main>

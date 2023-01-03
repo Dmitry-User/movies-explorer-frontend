@@ -16,7 +16,6 @@ const SearchForm = ({ isLoading, onFilter, onSearch }) => {
   const handleCheck = (e) => {
     setIsShort(e.target.checked);
     onFilter(e.target.checked);
-    if (!locationMovies) setQuery("");
   };
 
   const handleSubmit = (e) => {

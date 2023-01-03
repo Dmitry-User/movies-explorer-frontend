@@ -16,7 +16,7 @@ const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
 
   useEffect(() => {
     onHideMessage();
-  },[values]);
+  }, [values]);
 
   return (
     <PageWithForm
@@ -31,6 +31,9 @@ const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
         type="text"
         name="name"
         placeholder="Введите имя"
+        pattern="^[A-Za-zА-Яа-яЁё\s\-]*$"
+        minLength="2"
+        maxLength="30"
         value={values.name}
         error={errors.name}
         onChange={handleChange}
@@ -40,6 +43,7 @@ const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
         type="email"
         name="email"
         placeholder="Введите email"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
         value={values.email}
         error={errors.email}
         onChange={handleChange}

@@ -9,19 +9,23 @@ const SavedMovies = ({ movies, onClick, findInSavedMovies }) => {
   const [message, setMessage] = useState("");
 
   const handleSearch = (query, isShort) => {
-    const foundMovies = searchMovies(movies, query);
+    let foundMovies = searchMovies(movies, query);
+    localStorage.setItem("selected-saved-movies", JSON.stringify(foundMovies));
 
     if (foundMovies.length === 0) {
       setSelectedMovies([]);
       setMessage("Ничего не найдено");
     } else {
-      setSelectedMovies(filterMovies(foundMovies, isShort));
-      setMessage("");
+      setSelectedMovies(() => {
+        foundMovies = filterMovies(foundMovies, isShort);
+        foundMovies.length === 0 ? setMessage("Ничего не найдено") : setMessage("");
+        return foundMovies;
+      });
     }
   };
 
   const handleFilter = (isShort) => {
-    const foundMovies = filterMovies(movies, isShort);
+    const foundMovies = filterMovies(JSON.parse(localStorage.getItem("selected-saved-movies")) || movies, isShort);
     foundMovies.length === 0 ? setMessage("Ничего не найдено") : setMessage("");
     setSelectedMovies(foundMovies);
   };

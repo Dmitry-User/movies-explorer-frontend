@@ -159,6 +159,7 @@ const App = () => {
 
   const handleEditProfile = () => {
     setIsEditProfile(true);
+    setResultMessage("");
   };
 
   const hideMessage = () => {

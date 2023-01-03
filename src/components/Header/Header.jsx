@@ -5,7 +5,7 @@ import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 
 const Header = ({ loggedIn, location }) => {
-  const [ isOpenNav, setisOpenNav] = useState(false);
+  const [isOpenNav, setisOpenNav] = useState(false);
 
   const toggleNav = () => {
     setisOpenNav(!isOpenNav);

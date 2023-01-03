@@ -1,7 +1,6 @@
 import "./Promo.css";
 
 const Promo = () => {
-
   return (
     <section className="promo">
       <div className="promo__content">

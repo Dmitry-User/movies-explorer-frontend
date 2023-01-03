@@ -4,8 +4,7 @@ import { BASE_URL } from "../../utils/constants";
 import getHoursAndMins from "../../utils/convertedDuration";
 
 const MoviesCard = ({ movie, isLiked, onClick }) => {
-  const { pathname } = useLocation();
-  const locationMovies = pathname === "/movies";
+  const locationMovies = useLocation().pathname === "/movies";
 
   const handleClick = () => {
     onClick(movie);
