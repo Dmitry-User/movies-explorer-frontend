@@ -1,8 +1,9 @@
 import "./Profile.css";
-import { useRef, useContext, useEffect } from "react";
+import { useRef, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
+import { NAME_REGEX, EMAIL_REGEX } from "../../utils/constants";
 
 const Profile = ({
   onLogout,
@@ -14,17 +15,22 @@ const Profile = ({
   onHideMessage,
 }) => {
   const user = useContext(CurrentUserContext);
+  const ref = useRef(null);
+  const [isEdit, setIsEdit] = useState(false);
   const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation(user);
   const buttonText = isLoading ? "Сохранение..." : "Сохранить";
-  const ref = useRef(null);
 
   useEffect(() => {
     ref.current.focus();
-  },[isEditProfile]);
+  }, [isEditProfile]);
 
   useEffect(() => {
     onHideMessage();
   }, [values]);
+
+  useEffect(() => {
+    setIsEdit(user.name !== values.name || user.email !== values.email);
+  }, [user, values]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,7 +55,7 @@ const Profile = ({
                   value={values.name}
                   minLength={2}
                   maxLength={30}
-                  pattern="^[A-Za-zА-Яа-яЁё\s\-]*$"
+                  pattern={NAME_REGEX}
                   placeholder="Имя пользователя"
                   disabled={!isEditProfile}
                   required
@@ -66,7 +72,7 @@ const Profile = ({
                   type="email"
                   onChange={handleChange}
                   value={values.email}
-                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                  pattern={EMAIL_REGEX}
                   placeholder="E-mail пользователя"
                   disabled={!isEditProfile}
                   required
@@ -81,8 +87,8 @@ const Profile = ({
             {isEditProfile ? (
               <button
                 type="submit"
-                className={`profile__submit ${!isValid && "profile__submit_disabled"}`}
-                disabled={!isValid}
+                className={`profile__submit ${!isValid || !isEdit ? "profile__submit_disabled" : ""}`}
+                disabled={!isValid || !isEdit}
               >
                 {buttonText}
               </button>

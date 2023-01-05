@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.moviexplorers.nomoredomains.club';
+import { BASE_URL } from "./constants";
 // const BASE_URL = 'http://localhost:3001';
 
 const request = ({ url, method, data }) => {

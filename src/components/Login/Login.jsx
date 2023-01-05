@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PageWithForm from "../PageWithForm/PageWithForm";
 import FormInput from "../FormInput/FormInput";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
-import { loginContent } from "../../utils/constants";
+import { EMAIL_REGEX, loginContent } from "../../utils/constants";
 
 const Login = ({
   onLogin,
@@ -36,7 +36,7 @@ const Login = ({
         type="email"
         name="email"
         placeholder="Введите email"
-        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        pattern={EMAIL_REGEX}
         value={values.email}
         error={errors.email}
         onChange={handleChange}

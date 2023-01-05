@@ -3,10 +3,15 @@ import { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { filterMovies, searchMovies } from "../../utils/filterMovies";
+import { NOT_FOUND_MESSAGE } from "../../utils/constants";
 
 const SavedMovies = ({ movies, onClick, findInSavedMovies }) => {
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [message, setMessage] = useState("");
+
+  const handleMessage = (array) => {
+    setMessage(array.length === 0 ? NOT_FOUND_MESSAGE : "");
+  };
 
   const handleSearch = (query, isShort) => {
     let foundMovies = searchMovies(movies, query);
@@ -14,11 +19,11 @@ const SavedMovies = ({ movies, onClick, findInSavedMovies }) => {
 
     if (foundMovies.length === 0) {
       setSelectedMovies([]);
-      setMessage("Ничего не найдено");
+      handleMessage(foundMovies);
     } else {
       setSelectedMovies(() => {
         foundMovies = filterMovies(foundMovies, isShort);
-        foundMovies.length === 0 ? setMessage("Ничего не найдено") : setMessage("");
+        handleMessage(foundMovies);
         return foundMovies;
       });
     }
@@ -26,7 +31,7 @@ const SavedMovies = ({ movies, onClick, findInSavedMovies }) => {
 
   const handleFilter = (isShort) => {
     const foundMovies = filterMovies(JSON.parse(localStorage.getItem("selected-saved-movies")) || movies, isShort);
-    foundMovies.length === 0 ? setMessage("Ничего не найдено") : setMessage("");
+    handleMessage(foundMovies);
     setSelectedMovies(foundMovies);
   };
 

@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext"
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -14,11 +14,11 @@ import Login from "../Login/Login";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
-import { pathsForHeader, pathsForFooter } from "../../utils/constants";
+import { SUCCESSFUL_UPDATE_USER_MESSAGE, pathsForHeader, pathsForFooter } from "../../utils/constants";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("loggedIn")) ?? false);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditProfile, setIsEditProfile] = useState(false);
   const [resultMessage , setResultMessage] = useState("");
@@ -79,35 +79,29 @@ const App = () => {
     } else {
       handleAddMovie(movie);
     }
-   };
+  };
 
-  const checkToken = () => {
+  const getUserInfo = () => {
     mainApi
       .getUser()
       .then((res) => {
-        if (!res.ok) {
-          setCurrentUser({});
-          setLoggedIn(false);
-          navigate("/");
-        }
+        localStorage.setItem("loggedIn", true);
         setCurrentUser(res);
-        setLoggedIn(true);
-        getMoviesMyApi();
-        navigate("/movies");
       })
       .catch((err) => {
+        setLoggedIn(false);
         console.log(err.message);
       });
   };
 
   const handleUpdateUser = (updatedUser) => {
     setIsLoading(true);
-    return mainApi
+    mainApi
       .setUser(updatedUser)
       .then((res) => {
         setCurrentUser(res);
         setIsEditProfile(false);
-        setResultMessage('Данные пользователя успешно обновлены');
+        setResultMessage(SUCCESSFUL_UPDATE_USER_MESSAGE);
       })
       .catch((err) => {
         setIsEditProfile(true);
@@ -118,7 +112,7 @@ const App = () => {
 
   const handleRegister = (newUser) => {
     setIsLoading(true);
-    return mainApi
+    mainApi
       .register(newUser)
       .then(() => {
         handleLogin(newUser);
@@ -131,19 +125,23 @@ const App = () => {
 
   const handleLogin = (user) => {
     setIsLoading(true);
-    return mainApi
+    mainApi
       .authorize(user)
       .then(() => {
-        checkToken();
+        setLoggedIn(true);
+        getUserInfo();
+        getMoviesMyApi();
+        navigate("/movies");
       })
       .catch((err) => {
+        setLoggedIn(false);
         setResultMessage(err.message);
       })
       .finally(() => setIsLoading(false));
   };
 
   const handleLogout = () => {
-    return mainApi
+    mainApi
       .logout()
       .then(() => {
         setLoggedIn(false);
@@ -171,7 +169,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    checkToken();
+    getUserInfo();
+    if (loggedIn) getMoviesMyApi();
   }, []);
 
   return (
@@ -227,25 +226,29 @@ const App = () => {
           />
           <Route
             path="/signup"
-            element={
+            element={loggedIn ? (
+              <Navigate to="/" />
+            ) : (
               <Register
                 onRegister={handleRegister}
                 message={resultMessage}
                 isLoading={isLoading}
                 onHideMessage={hideMessage}
               />
-            }
+            )}
           />
           <Route
             path="/signin"
-            element={
+            element={loggedIn ? (
+              <Navigate to="/" />
+            ) : (
               <Login
                 onLogin={handleLogin}
                 message={resultMessage}
                 isLoading={isLoading}
                 onHideMessage={hideMessage}
               />
-            }
+            )}
           />
           <Route
             path="*"

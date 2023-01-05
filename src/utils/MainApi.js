@@ -1,5 +1,5 @@
 import request from './request';
-import { BASE_URL } from './constants';
+import { BASE_URL_BEATFILM } from './constants';
 
 export const getUser = () => {
   return request({
@@ -56,9 +56,9 @@ export const addMovie = (movie) => {
       duration: movie.duration,
       year: movie.year,
       description: movie.description,
-      image: `${BASE_URL}${movie.image.url}`,
+      image: `${BASE_URL_BEATFILM}${movie.image.url}`,
       trailerLink: movie.trailerLink,
-      thumbnail: `${BASE_URL}${movie.image.formats.thumbnail.url}`,
+      thumbnail: `${BASE_URL_BEATFILM}${movie.image.formats.thumbnail.url}`,
       movieId: movie.id,
       nameRU: movie.nameRU,
       nameEN: movie.nameEN,

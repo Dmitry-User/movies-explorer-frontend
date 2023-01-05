@@ -6,7 +6,7 @@ const SearchForm = ({ isLoading, onFilter, onSearch }) => {
   const [query, setQuery] = useState("");
   const [isShort, setIsShort] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const locationMovies = useLocation().pathname === "/movies";
+  const isMoviesPage = useLocation().pathname === "/movies";
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -21,7 +21,7 @@ const SearchForm = ({ isLoading, onFilter, onSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query) return setIsValid(false);
-    if (locationMovies) {
+    if (isMoviesPage) {
       localStorage.setItem("query", query);
       localStorage.setItem("short", isShort);
     }
@@ -29,7 +29,7 @@ const SearchForm = ({ isLoading, onFilter, onSearch }) => {
   };
 
   useEffect(() => {
-    if (!locationMovies || !localStorage.length) return;
+    if (!isMoviesPage || !localStorage.length) return;
     setQuery(localStorage.getItem("query") || "");
     setIsShort(JSON.parse(localStorage.getItem("short")) || false);
   }, []);

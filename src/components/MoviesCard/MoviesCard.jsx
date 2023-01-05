@@ -1,6 +1,6 @@
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL_BEATFILM } from "../../utils/constants";
 import getHoursAndMins from "../../utils/convertedDuration";
 
 const MoviesCard = ({ movie, isLiked, onClick }) => {
@@ -20,7 +20,7 @@ const MoviesCard = ({ movie, isLiked, onClick }) => {
       >
         <img
           className="card__image"
-          src={locationMovies ? (BASE_URL + movie.image.url) : movie.image}
+          src={locationMovies ? (BASE_URL_BEATFILM + movie.image.url) : movie.image}
           alt={movie.nameRU}
         />
       </a>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PageWithForm from "../PageWithForm/PageWithForm";
 import FormInput from "../FormInput/FormInput";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
-import { registerContent } from "../../utils/constants";
+import { NAME_REGEX, EMAIL_REGEX, registerContent } from "../../utils/constants";
 
 const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
   const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation({});
@@ -31,7 +31,7 @@ const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
         type="text"
         name="name"
         placeholder="Введите имя"
-        pattern="^[A-Za-zА-Яа-яЁё\s\-]*$"
+        pattern={NAME_REGEX}
         minLength="2"
         maxLength="30"
         value={values.name}
@@ -43,7 +43,7 @@ const Register = ({ onRegister, message, isLoading, onHideMessage }) => {
         type="email"
         name="email"
         placeholder="Введите email"
-        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        pattern={EMAIL_REGEX}
         value={values.email}
         error={errors.email}
         onChange={handleChange}

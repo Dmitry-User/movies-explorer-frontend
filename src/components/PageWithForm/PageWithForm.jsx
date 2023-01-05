@@ -17,7 +17,7 @@ const PageWithForm = ({
       <div className="page__content">
         <Logo />
         <h2 className="page__title">{pageTitle}</h2>
-        <form className="page__form" onSubmit={onSubmit}>
+        <form className="page__form" onSubmit={onSubmit} noValidate>
           <fieldset className="page__form-fieldset">
             {children}
           </fieldset>

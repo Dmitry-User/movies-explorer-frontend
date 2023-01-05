@@ -1,8 +1,8 @@
-import { BASE_URL } from './constants';
+import { BASE_URL_BEATFILM } from './constants';
 
 class Api {
   constructor() {
-    this._baseUrl = `${BASE_URL}/beatfilm-movies`;
+    this._baseUrl = `${BASE_URL_BEATFILM}/beatfilm-movies`;
     this._headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
