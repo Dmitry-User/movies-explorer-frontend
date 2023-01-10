@@ -36,7 +36,7 @@
 }
 
 .search__input:focus {
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .search__input::placeholder {
@@ -73,6 +73,19 @@
 
 .search__submit-button:hover {
   opacity: 0.8;
+}
+
+.search__error {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: #EE3465;
 }
 
 .search__checkbox-label {

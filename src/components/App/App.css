@@ -1,7 +1,7 @@
 /* убирает фон инпута) */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-  transition: background-color 6000s 0s, color 6000s 0s;
+  transition: background-color 60000s 0s, color 60000s 0s;
 }
 
 .app {

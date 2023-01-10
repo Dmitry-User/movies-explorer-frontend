@@ -6,6 +6,9 @@ const FormInput = ({
   name,
   value,
   placeholder,
+  pattern,
+  minLength,
+  maxLength,
   error,
   onChange,
 }) => {
@@ -18,7 +21,10 @@ const FormInput = ({
         name={name}
         onChange={onChange}
         placeholder={placeholder}
-        value={value}
+        pattern={pattern}
+        minLength={minLength}
+        maxLength={maxLength}
+        value={value || ""}
         required
       />
       <span className="page__form-error">{error}</span>

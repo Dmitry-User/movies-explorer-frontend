@@ -1,9 +1,9 @@
-import { NavLink, Link } from "react-router-dom";
 import "./Navigation.css";
+import { NavLink, Link } from "react-router-dom";
 
 const Navigation = ({ isOpen, onClick }) => {
   return (
-    <nav className={`navigation ${!isOpen && "navigation_hiden"}`}>
+    <nav className={`navigation ${!isOpen ? "navigation_hidden" : ""}`}>
       <ul className="navigation__links">
         <li>
           <ul className="navigation__links-container">
@@ -39,7 +39,7 @@ const Navigation = ({ isOpen, onClick }) => {
         <li>
           <Link
             className="navigation__link navigation__link_type_button-profile"
-            to="/profile"
+            to={"/profile"}
             onClick={onClick}
           >
             <span className="navigation__icon-profile"></span>

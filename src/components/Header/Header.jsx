@@ -4,24 +4,24 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 
-const Header = ({ loggedIn }) => {
-  const [ isOpenNav, setisOpenNav] = useState(false);
+const Header = ({ loggedIn, location }) => {
+  const [isOpenNav, setisOpenNav] = useState(false);
 
-  const toggleMenu = () => {
-    setisOpenNav(state => !state);
+  const toggleNav = () => {
+    setisOpenNav(!isOpenNav);
   };
 
   return (
-    <header className={`header ${!loggedIn ? "header_bg-color_deep-blue" : ""}`}>
+    <header className={`header ${location === "/" ? "header_bg-color_deep-blue" : ""}`}>
       <div className="header__content">
         <Logo />
         {loggedIn ? (
           <>
-            <Navigation isOpen={isOpenNav} onClick={toggleMenu}/>
+            <Navigation isOpen={isOpenNav} onClick={toggleNav}/>
             <button
               className={`header__button-burger ${ isOpenNav ? "header__button-burger_active" : ""}`}
               type="button"
-              onClick={toggleMenu}
+              onClick={toggleNav}
             >
               <span />
             </button>
