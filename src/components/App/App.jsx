@@ -47,7 +47,7 @@ const App = () => {
         setSavedMovies(movies);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       })
   };
 
@@ -81,6 +81,13 @@ const App = () => {
     }
   };
 
+  const resetValues = () => {
+    setLoggedIn(false);
+    setCurrentUser({});
+    setSavedMovies([]);
+    localStorage.clear();
+  };
+
   const getUserInfo = () => {
     mainApi
       .getUser()
@@ -89,7 +96,8 @@ const App = () => {
         setCurrentUser(res);
       })
       .catch((err) => {
-        setLoggedIn(false);
+        resetValues();
+        navigate("/");
         console.log(err.message);
       });
   };
@@ -144,10 +152,7 @@ const App = () => {
     mainApi
       .logout()
       .then(() => {
-        setLoggedIn(false);
-        setCurrentUser({});
-        setSavedMovies([]);
-        localStorage.clear();
+        resetValues();
         navigate("/");
       })
       .catch((err) => {
